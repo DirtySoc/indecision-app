@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel-watch": "babel src/playground/build-it-visible.jsx --out-file=./public/scripts/app.js --watch",
+    "babel-watch": "babel src/app.jsx --out-file=./public/scripts/app.js --watch",
     "dev": "live-server ./public"
   },
   "author": "Derek Willingham",
