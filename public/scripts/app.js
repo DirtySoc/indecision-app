@@ -32,8 +32,9 @@ function (_React$Component) {
     _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_assertThisInitialized(_this));
     _this.handlePick = _this.handlePick.bind(_assertThisInitialized(_this));
     _this.handleAddOption = _this.handleAddOption.bind(_assertThisInitialized(_this));
+    _this.handleDeleteOption = _this.handleDeleteOption.bind(_assertThisInitialized(_this));
     _this.state = {
-      options: []
+      options: props.options
     };
     return _this;
   }
@@ -44,6 +45,17 @@ function (_React$Component) {
       this.setState(function () {
         return {
           options: []
+        };
+      });
+    }
+  }, {
+    key: "handleDeleteOption",
+    value: function handleDeleteOption(optionToRemove) {
+      this.setState(function (prev) {
+        return {
+          options: prev.options.filter(function (option) {
+            return option != optionToRemove;
+          })
         };
       });
     }
@@ -71,17 +83,16 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var title = 'Indecision';
       var subtitle = 'Let me decide!';
       return React.createElement("div", null, React.createElement(Header, {
-        title: title,
         subtitle: subtitle
       }), React.createElement(Action, {
         hasOptions: this.state.options.length > 0,
         handlePick: this.handlePick
       }), React.createElement(Options, {
         options: this.state.options,
-        handleDeleteOptions: this.handleDeleteOptions
+        handleDeleteOptions: this.handleDeleteOptions,
+        handleDeleteOption: this.handleDeleteOption
       }), React.createElement(AddOption, {
         handleAddOption: this.handleAddOption
       }));
@@ -91,8 +102,16 @@ function (_React$Component) {
   return IndecisionApp;
 }(React.Component);
 
+IndecisionApp.defaultProps = {
+  options: []
+};
+
 var Header = function Header(props) {
-  return React.createElement("div", null, React.createElement("h1", null, props.title), React.createElement("h2", null, props.subtitle));
+  return React.createElement("div", null, React.createElement("h1", null, props.title), props.subtitle && React.createElement("h2", null, props.subtitle));
+};
+
+Header.defaultProps = {
+  title: 'Indecision'
 };
 
 var Action = function Action(props) {
@@ -106,7 +125,8 @@ var Options = function Options(props) {
   return React.createElement("div", null, props.options.map(function (option) {
     return React.createElement(Option, {
       key: option,
-      optionText: option
+      optionText: option,
+      handleDeleteOption: props.handleDeleteOption
     });
   }), React.createElement("button", {
     onClick: props.handleDeleteOptions
@@ -114,7 +134,13 @@ var Options = function Options(props) {
 };
 
 var Option = function Option(props) {
-  return React.createElement("div", null, React.createElement("p", null, props.optionText));
+  // You have to pass inline function to onClick for remove because
+  // the event object is returned otherwise.
+  return React.createElement("div", null, props.optionText, React.createElement("button", {
+    onClick: function onClick(e) {
+      props.handleDeleteOption(props.optionText);
+    }
+  }, "remove"));
 };
 
 var AddOption =
