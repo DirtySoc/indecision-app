@@ -7,21 +7,11 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        rules: [
-            {
+        rules: [{
+                loader: 'babel-loader',
                 test: /\.jsx$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env',
-                            '@babel/preset-react'
-                        ]                        
-                    }
-                }
-            }
-        ]
+                exclude: /(node_modules|bower_components)/
+            }]
     },
     devtool: 'cheap-module-eval-source-map',
     devServer: {

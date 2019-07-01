@@ -3,3 +3,29 @@ import ReactDOM from 'react-dom'
 import IndecisionApp from './components/IndecisionApp.jsx'
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
+
+// Example of new JS syntax w/ "@babel/plugin-proposal-class-properties"
+
+// class OldSyntax {
+//     constructor() {
+//         this.name = 'Mike';
+//         this.getGreeting = this.getGreeting.bind(this)
+//     }
+//     getGreeting() {
+//         return `Hi, my name is ${this.name}.`
+//     }
+// }
+// const oldSyntax = new OldSyntax()
+// const getGreeting = oldSyntax.getGreeting
+// console.log(getGreeting())
+
+// // Using babel we can use the newer class syntax that allows for field declarations
+// class NewSyntax {
+//     name = 'Jen'
+//     getGreeting = () => {
+//         return `Hi, my name is ${this.name}.`
+//     }
+// }
+// const newSyntax = new NewSyntax()
+// const newGetGreeting = newSyntax.getGreeting
+// console.log(newGetGreeting())
