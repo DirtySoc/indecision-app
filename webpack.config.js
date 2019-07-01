@@ -3,8 +3,8 @@ const path = require('path')
 module.exports = {
     entry: './src/app.jsx',
     output: {
-        path: path.resolve(__dirname, 'public/scripts'),
-        filename: 'app.bundle.js'
+        path: path.join(__dirname, 'public'),
+        filename: 'bundle.js'
     },
     module: {
         rules: [
@@ -22,5 +22,9 @@ module.exports = {
                 }
             }
         ]
+    },
+    devtool: 'cheap-module-eval-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, 'public')
     }
 }
