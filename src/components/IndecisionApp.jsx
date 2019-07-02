@@ -23,7 +23,7 @@ export default class IndecisionApp extends React.Component {
     }
     handlePick = () => {
         const optionSelect = Math.floor(Math.random() * this.state.options.length)
-        this.setState(() => ({ selectedOption: this.state.options[optionSelect]}))
+        this.setState(() => ({ selectedOption: this.state.options[optionSelect] }))
     }
     handleAddOption = (option) => {
         if (!option) {
@@ -60,19 +60,21 @@ export default class IndecisionApp extends React.Component {
         return (
             <div>
                 <Header subtitle={subtitle} />
-                <Action
-                    hasOptions={this.state.options.length > 0}
-                    handlePick={this.handlePick}
-                />
-                <Options
-                    options={this.state.options}
-                    handleDeleteOptions={this.handleDeleteOptions}
-                    handleDeleteOption={this.handleDeleteOption}
-                />
-                <AddOption
-                    handleAddOption={this.handleAddOption}
-                />
-                <OptionModal 
+                <div className="container">
+                    <Action
+                        hasOptions={this.state.options.length > 0}
+                        handlePick={this.handlePick}
+                    />
+                    <Options
+                        options={this.state.options}
+                        handleDeleteOptions={this.handleDeleteOptions}
+                        handleDeleteOption={this.handleDeleteOption}
+                    />
+                    <AddOption
+                        handleAddOption={this.handleAddOption}
+                    />
+                </div>
+                <OptionModal
                     selectedOption={this.state.selectedOption}
                     closeModal={this.handleClearSelected}
                 />
